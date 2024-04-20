@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-PAGE = "http://opencart:8080"
-
 def get_webdriver():
     # Get Chrome/Firefox driver from Selenium Hub
     try:
@@ -22,7 +20,6 @@ def get_webdriver():
 
 def before_all(context):
     context.driver = get_webdriver()
-    context.base_url = PAGE
 
 def after_all(context):
-    context.drier.quit()
+    context.driver.quit()
