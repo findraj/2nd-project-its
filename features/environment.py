@@ -1,29 +1,33 @@
 #!/usr/bin/env python3
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import WebDriverException
 
+
 def get_driver():
     '''Get Chrome/Firefox driver from Selenium Hub'''
     try:
+        options = webdriver.ChromeOptions()
         driver = webdriver.Remote(
                 command_executor='http://localhost:4444/wd/hub',
-                desired_capabilities=DesiredCapabilities.CHROME)
+                options=options)
     except WebDriverException:
+        options = webdriver.FirefoxOptions()
         driver = webdriver.Remote(
                 command_executor='http://localhost:4444/wd/hub',
-                desired_capabilities=DesiredCapabilities.FIREFOX)
-    driver.implicitly_wait(15)
+                options=options)
 
-    # Web stranku ziskate nasledujicim:
-    # (jedno nebo druhe, zalezi na nastaveni prostedi)
-    # driver.get("http://opencart:8080/")
-    # driver.get("http://localhost:8080/")
+    driver.implicitly_wait(15)
+    driver.get("http://opencart:8080/")
 
     return driver
 
-    # Nezapomente vzdy po ukonceni testovani zavrit driver:
-    # driver.close() nebo .quit()
+def before_all(context):
+    context.driver = get_driver()
+
+def after_all(context):
+    context.driver.quit()

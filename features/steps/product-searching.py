@@ -2,7 +2,7 @@ from behave import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
-SUT_URL = "http://opencart:8000"
+SUT_URL = "http://opencart:8080"
 
 @given(u'user is on the home page')
 def step_impl(context):
