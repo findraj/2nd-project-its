@@ -1,6 +1,7 @@
 version: '2'
 services:
   mariadb:
+    platform: linux/amd64
     image: docker.io/bitnami/mariadb:10.6
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
@@ -13,6 +14,7 @@ services:
       - selenium-its
 
   opencart:
+    platform: linux/amd64
     image: docker.io/bitnami/opencart:4
     ports:
       - '8080:8080'
@@ -35,6 +37,7 @@ services:
       - selenium-its
 
   selenium-hub:
+    platform: linux/amd64
     image: selenium/hub:4.8
     container_name: selenium-hub
     ports:
@@ -45,6 +48,7 @@ services:
       - selenium-its
 
   chrome:
+    platform: linux/amd64
     image: selenium/node-chrome:4.8
     shm_size: 2gb
     depends_on:

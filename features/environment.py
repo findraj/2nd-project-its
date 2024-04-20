@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import WebDriverException
+from time import sleep
 
 
 def get_driver():
@@ -26,8 +27,15 @@ def get_driver():
 
     return driver
 
-def before_all(context):
-    context.driver = get_driver()
+# def before_all(context):
+#     context.driver = get_driver()
 
-def after_all(context):
-    context.driver.quit()
+# def after_all(context):
+#     context.driver.quit()
+
+def before_scenario(context, scenario):
+        context.driver = get_driver()
+
+def after_scenario(context, scenario):
+    if context.driver:
+        context.driver.quit()
