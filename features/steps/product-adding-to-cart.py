@@ -47,6 +47,7 @@ def step_impl(context):
 
 @then(u'item is not added to the cart')
 def step_impl(context):
+    sleep(0.1)
     inCart = context.driver.find_element(By.CSS_SELECTOR, ".btn-inverse").text
     assert inCart == '0 item(s) - $0.00'
 
@@ -76,5 +77,6 @@ def step_impl(context):
 
 @then(u'item is added to the cart')
 def step_impl(context):
+    sleep(0.1)
     inCart = context.driver.find_element(By.CSS_SELECTOR, ".btn-inverse").text
     assert inCart == '1 item(s) - $98.00'
