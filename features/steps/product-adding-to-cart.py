@@ -71,7 +71,6 @@ def step_impl(context):
 # 8
 @when(u'user fill all mandatory fields')
 def step_impl(context):
-    element = context.driver.find_element(By.ID, "input-option-226").click()
     dropdown = context.driver.find_element(By.ID, "input-option-226")
     dropdown.find_element(By.XPATH, "//option[@value='15']").click()
 
