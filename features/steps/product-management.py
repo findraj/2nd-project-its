@@ -8,54 +8,53 @@ PASSWORD = "bitnami"
 
 @given(u'admin is on the products page')
 def step_impl(context):
-    context.driver.find_element(By.ID, "input-username").click()
-    context.driver.find_element(By.ID, "input-username").send_keys("user")
-    context.driver.find_element(By.ID, "input-password").click()
-    context.driver.find_element(By.ID, "input-password").send_keys("bitnami")
+    context.driver.get(SUT_URL)
+    context.driver.find_element(By.NAME, "username").click()
+    context.driver.find_element(By.NAME, "username").send_keys("user")
+    context.driver.find_element(By.NAME, "password").click()
+    context.driver.find_element(By.NAME, "password").send_keys("bitnami")
     context.driver.find_element(By.CSS_SELECTOR, ".btn").click()
     context.driver.find_element(By.LINK_TEXT, "Catalog").click()
     context.driver.find_element(By.LINK_TEXT, "Products").click()
 
-
+# 12
 @when(u'admin click on the checkbox next to a product')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin click on the checkbox next to a product')
+    context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[1]/input").click()
 
 
 @when(u'admin clicks on the "Delete" button')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin clicks on the "Delete" button')
+    context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[1]/div/div/button[3]").click()
 
 
 @when(u'admin accept the pop-up window')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin accept the pop-up window')
+    assert context.driver.switch_to.alert.text == "Are you sure?"
+    context.driver.switch_to.alert.accept()
 
 
 @then(u'the product is removed from the list')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the product is removed from the list')
+    deletedProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[3]").text
+    assert deletedProduct != 'Apple Cinema 30" '
 
-
-@when(u'admin clicks on button "Filter"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin clicks on button "Filter"')
-
-
+# 13
 @when(u'admin chooses a product name')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin chooses a product name')
+    context.driver.find_element(By.ID, "input-name").click()
+    context.driver.find_element(By.ID, "input-name").send_keys("iphone")
 
 
 @when(u'admin press button "Filter"')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When admin press button "Filter"')
+    context.driver.find_element(By.ID, "button-filter").click()
 
 
 @then(u'only matching items are displayed')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then only matching items are displayed')
-
+    filteredProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr/td[3]").text
+    assert filteredProduct[:6] == "iPhone"
 
 @when(u'admin clicks on "Add New" button')
 def step_impl(context):
