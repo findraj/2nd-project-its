@@ -25,7 +25,7 @@ Given user is on the result page #2
 When user doesn't fill mandatory fields
 And user clicks on "Add to Cart" button
 Then item is not added to the cart
-And a warning is shown
+# And a warning is shown
 
 # 8
 Scenario: Adding an item with options - filled

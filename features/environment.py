@@ -27,8 +27,8 @@ def get_driver():
 
     return driver
 
-# def before_all(context):
-#     context.driver = get_driver()
+def before_all(context):
+    sleep(10)
 
 # def after_all(context):
 #     context.driver.quit()
