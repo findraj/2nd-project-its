@@ -1,17 +1,17 @@
 from behave import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 
 SUT_URL = "http://opencart:8080"
-
+# given for scenarios starting on the home page (1, 2, 3, 4)
 @given(u'user is on the home page')
 def step_impl(context):
+    """OpenCart home page is displayed"""
     context.driver.get(SUT_URL)
 
-# 1
+# Scenario 1
 @when(u'user types query in the search bar')
 def step_impl(context):
-    context.driver.find_element(By.NAME, "search").click()
+    context.driver.find_element(By.NAME, "search").click() # search bar is clicked
     context.driver.find_element(By.NAME, "search").send_keys("iphone")
 
 
@@ -24,9 +24,9 @@ def step_impl(context):
 def step_impl(context):
     assert context.driver.find_element(By.XPATH, "//img[@alt='iPhone']").is_displayed()
 
-# 2
+# Scenario 2
 @when(u'user clicks on the "Categorioes" list')
-# not necessary in when screen is big enough
+# Not necessary, because when page is big enough, the list is always visible
 
 
 @when(u'user clicks on chosen category')
@@ -38,7 +38,7 @@ def step_impl(context):
 def step_impl(context):
     assert context.driver.find_element(By.XPATH, "//img[@alt='iPhone']").is_displayed()
 
-# 3
+# Scenario 3
 @when(u'user clicks on the picture in the animation')
 def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, ".col-12 > a > .img-fluid").click()

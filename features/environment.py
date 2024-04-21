@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import WebDriverException
 from time import sleep
 
@@ -28,14 +23,14 @@ def get_driver():
     return driver
 
 def before_all(context):
-    sleep(10)
-
-# def after_all(context):
-#     context.driver.quit()
+    """Actions before all scenarios"""
+    sleep(10) # wait for the Selenium Hub to start
 
 def before_scenario(context, scenario):
+        """Actions before each scenario"""
         context.driver = get_driver()
 
 def after_scenario(context, scenario):
+    """Actions after each scenario"""
     if context.driver:
         context.driver.quit()

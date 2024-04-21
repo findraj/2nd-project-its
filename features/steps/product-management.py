@@ -1,6 +1,5 @@
 from behave import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 from selenium.webdriver.common.keys import Keys
 
@@ -8,6 +7,7 @@ SUT_URL = "http://opencart:8080/administration"
 LOGIN = "user"
 PASSWORD = "bitnami"
 
+# given for scenarios starting on the products page (12, 13, 14, 15, 16, 17, 18)
 @given(u'admin is on the products page')
 def step_impl(context):
     context.driver.get(SUT_URL)
@@ -19,7 +19,7 @@ def step_impl(context):
     context.driver.find_element(By.LINK_TEXT, "Catalog").click()
     context.driver.find_element(By.LINK_TEXT, "Products").click()
 
-# 12
+# Scenario 12
 @when(u'admin clicks on the checkbox next to a product')
 def step_impl(context):
     context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[1]/input").click()
@@ -42,7 +42,7 @@ def step_impl(context):
     deletedProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[4]").text
     assert deletedProduct != 'Product 15'
 
-# 13
+# Scenario 13
 @when(u'admin chooses a product name')
 def step_impl(context):
     context.driver.find_element(By.ID, "input-name").click()
@@ -60,7 +60,7 @@ def step_impl(context):
     filteredProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[4]").text
     assert filteredProduct == "product 11"
 
-# 14
+# Scenario 14
 @when(u'admin clicks on "Add New" button')
 def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, ".btn > .fa-plus").click()
@@ -78,7 +78,7 @@ def step_impl(context):
 def step_impl(context):
     assert context.driver.find_element(By.CSS_SELECTOR, ".alert-danger").is_displayed()
 
-# 15
+# Scenario 15
 @when(u'admin fills all mandatory fields')
 def step_impl(context):
     context.driver.find_element(By.ID, "input-name-1").click()
@@ -100,7 +100,7 @@ def step_impl(context):
     filteredProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[4]").text
     assert filteredProduct == "asdf"
 
-# 16
+# Scenario 16
 @when(u'admin clicks on the "Copy" button')
 def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, ".fa-copy").click()
@@ -119,7 +119,7 @@ def step_impl(context):
     copiedProduct = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[2]/td[3]/small").text
     assert copiedProduct == 'Disabled'
 
-# 17
+# Scenario 17
 @when(u'admin clicks on the "Edit" button')
 def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .fa-pencil").click()
@@ -150,7 +150,7 @@ def step_impl(context):
     newAmount = context.driver.find_element(By.XPATH, "//html/body/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[1]/table/tbody/tr[1]/td[6]/span").text
     assert newAmount == '1'
 
-# 18
+# Scenario 18
 @when(u'admin turns off "Status"')
 def step_impl(context):
     element = context.driver.find_element(By.ID, "input-status")

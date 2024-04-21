@@ -1,13 +1,14 @@
 from behave import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 
 SUT_URL = "http://opencart:8080"
 
+# given for scenarios starting on the checkout page (9, 10, 11)
 @given(u'user is on the checkout page with some products in the cart')
 def step_impl(context):
     context.driver.get(SUT_URL)
+    # add item to the cart
     element = context.driver.find_element(By.XPATH, "//html/body/main/div[2]/div/div/div[2]/div[1]/div/div[2]/form/div/button[1]")
     element.location_once_scrolled_into_view
     sleep(0.2)
@@ -19,7 +20,7 @@ def step_impl(context):
     element.click()
     context.driver.find_element(By.CSS_SELECTOR, "a:nth-child(2) > strong").click()
 
-# 9
+# Scenario 9
 @when(u'clicks on the "Continue" button')
 def step_impl(context):
     element = context.driver.find_element(By.ID, "button-register")
@@ -32,7 +33,7 @@ def step_impl(context):
 def step_impl(context):
     assert context.driver.find_element(By.CSS_SELECTOR, ".alert-danger").is_displayed()
 
-# 10
+# Scenario 10
 @when(u'user fills all mandatory fields')
 def step_impl(context):
     context.driver.find_element(By.ID, "input-firstname").click()
@@ -57,7 +58,7 @@ def step_impl(context):
     context.driver.find_element(By.ID, "input-password").click()
     context.driver.find_element(By.ID, "input-password").send_keys("asdf")
 
-# 11
+# Scenario 11
 @when(u'user accepts the Privacy Policy')
 def step_impl(context):
     context.driver.find_element(By.ID, "input-register-agree").click()
