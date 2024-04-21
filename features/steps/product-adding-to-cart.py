@@ -11,7 +11,7 @@ SUT_URL = "http://opencart:8080"
 def step_impl(context):
     element = context.driver.find_element(By.XPATH, "//html/body/main/div[2]/div/div/div[2]/div[1]/div/div[2]/form/div/button[1]")
     element.location_once_scrolled_into_view
-    sleep(0.1)
+    sleep(0.2)
     element.click()
 
 @then (u'the item is added to the cart')
@@ -72,9 +72,7 @@ def step_impl(context):
 def step_impl(context):
     element = context.driver.find_element(By.ID, "input-option-226").click()
     dropdown = context.driver.find_element(By.ID, "input-option-226")
-    dropdown.find_element(By.XPATH, "//option[@value='15']")
-    context.driver.find_element(By.ID, "button-cart").click()
-
+    dropdown.find_element(By.XPATH, "//option[@value='15']").click()
 
 @then(u'item is added to the cart')
 def step_impl(context):

@@ -46,4 +46,4 @@ def step_impl(context):
 
 @then(u'page with previously shown product is displayed')
 def step_impl(context):
-    assert not  context.driver.find_element(By.XPATH, "//img[@alt='Samsung Galaxy Tab 10.1']").is_displayed()
+    assert context.driver.find_element(By.XPATH, "//img[@alt='Samsung Galaxy Tab 10.1']").is_displayed()
